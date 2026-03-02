@@ -6,9 +6,64 @@ Artifact → Local → Git → Live
 
 ---
 
+## Pick Your Entry Point
+
+Not every idea starts the same way. Choose where to jump in based on how clear your vision is.
+
+### Level 1: Explore — Start in Claude Artifact
+
+**You don't know exactly what you want yet.**
+
+You have a rough idea — "a trip planner", "a dashboard", "a portfolio" — but you're still figuring out the layout, the data, the feel. Artifact lets you iterate visually in seconds without touching a terminal.
+
+```
+"I want to build a Boracay itinerary app. Make it look clean with
+tabs for timeline, budget, and details. Use shadcn/ui and Tailwind."
+```
+
+Iterate until it looks and feels right, then move to Level 2.
+
+**Best for:** New ideas, exploring layouts, visual experiments, vibe checks.
+
+### Level 2: Build — Start in Claude Code
+
+**You know what you want. You have the component (or a clear spec).**
+
+You already have a `.jsx` file from an Artifact, a screenshot to replicate, or a clear picture in your head. Skip prototyping and go straight to a real project.
+
+```
+"I have a React component in boracay-itinerary.jsx that uses
+shadcn/ui Tabs, Checkbox, and Badge. Create a Vite + React + Tailwind
+project. Install, test locally, git init, push to GitHub, deploy to Vercel."
+```
+
+**Best for:** Shipping fast, known designs, artifact-to-production, rebuilding something you've seen.
+
+### Level 3: Iterate — Already Live
+
+**Your app is deployed and you need to change or add features.**
+
+The project exists, it's on GitHub, it's on Vercel. You just need to make changes and redeploy.
+
+```
+"Add a dark mode toggle to the app. Test locally, then push and redeploy."
+```
+
+**Best for:** Feature additions, bug fixes, design tweaks, content updates.
+
+### Quick Reference
+
+| Clarity Level | Entry Point | You Say... |
+|---------------|-------------|------------|
+| "I have a vague idea" | Claude Artifact | "Build me a [thing] that does [stuff]" |
+| "I have a component/design" | Claude Code | "Scaffold this into a project and deploy" |
+| "I need to change my live app" | Claude Code | "Update [feature] and redeploy" |
+
+---
+
 ## Overview
 
-A repeatable process for turning Claude Artifact prototypes into deployed, production-ready web apps.
+A repeatable process for turning ideas into deployed, production-ready web apps.
 
 | Phase | Tool | Output |
 |-------|------|--------|
@@ -136,15 +191,28 @@ Connect the GitHub repo in Vercel Dashboard → Settings → Git. Every `git pus
 
 ---
 
-## One-Shot Prompt
+## One-Shot Prompts
 
-Copy-paste this for future projects:
+Copy-paste based on your entry level.
 
+**Level 1 — Explore (Artifact):**
+```
+Build me a [describe your idea]. Use React with shadcn/ui components
+and Tailwind CSS. Make it interactive with [tabs/toggles/accordions/etc].
+```
+
+**Level 2 — Build (Claude Code):**
 ```
 I have a React component in [filename].jsx that uses [list shadcn components].
 Create a Vite + React + Tailwind project around it.
 Set up package.json, install dependencies, deploy locally and test,
 init git, push to GitHub, and deploy to Vercel production.
+```
+
+**Level 3 — Iterate (Claude Code):**
+```
+In my [project-name] repo, [describe the change].
+Test locally, commit, push, and redeploy to Vercel.
 ```
 
 ---
