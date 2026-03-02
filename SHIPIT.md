@@ -294,7 +294,66 @@ Test locally, commit, push, and redeploy to Vercel.
 
 ---
 
-## When to Level Up
+## When You Need a Backend
+
+The pipeline above is for frontend-only apps. When your idea needs login, a database, file uploads, or APIs — here's the free/freemium toolkit that works with Claude Code.
+
+### The Recommended Combo
+
+For most projects that need a backend:
+
+```
+Next.js  +  Supabase  +  Vercel
+```
+
+- **Next.js** replaces Vite — same React, but adds API routes and SSR
+- **Supabase** gives you Postgres + Auth + Storage in one dashboard
+- **Vercel** you already know — deploys Next.js natively
+- All three have generous free tiers
+- Claude Code works great with all of them
+
+This covers ~90% of app ideas: login, save data, upload files, send emails, deploy.
+
+### Auth (Login)
+
+| Tool | Free Tier | Best For |
+|------|-----------|----------|
+| **Supabase Auth** | 50K monthly active users | Full auth — email, Google, GitHub, magic link |
+| **Clerk** | 10K monthly active users | Drop-in UI components, looks polished fast |
+| **Auth.js (NextAuth)** | Unlimited (open source) | DIY but free forever, works with Next.js |
+
+### Database
+
+| Tool | Free Tier | Best For |
+|------|-----------|----------|
+| **Supabase** | 500MB Postgres + realtime | Full app database, SQL, row-level security |
+| **Vercel Postgres** | 256MB | Small projects already on Vercel |
+| **Neon** | 512MB Postgres, serverless | Scales to zero, branching for dev/prod |
+| **Upstash Redis** | 10K commands/day | Cache, sessions, rate limiting, fast key-value |
+
+### Storage (Files / Images)
+
+| Tool | Free Tier | Best For |
+|------|-----------|----------|
+| **Supabase Storage** | 1GB | User uploads, images |
+| **Cloudflare R2** | 10GB + no egress fees | Larger files, zero bandwidth cost |
+| **Vercel Blob** | 500MB | Quick file storage on Vercel |
+
+### Email
+
+| Tool | Free Tier | Best For |
+|------|-----------|----------|
+| **Resend** | 3K emails/month | Transactional emails, nice API |
+| **Brevo (Sendinblue)** | 300 emails/day | Marketing + transactional |
+
+### Serverless Functions (API)
+
+| Tool | Free Tier | Best For |
+|------|-----------|----------|
+| **Vercel Functions** | 100GB-hrs/month | API routes in Next.js — already on Vercel |
+| **Cloudflare Workers** | 100K requests/day | Edge functions, insanely fast |
+
+### When to Level Up
 
 | You need... | Upgrade to |
 |-------------|-----------|
@@ -304,9 +363,20 @@ Test locally, commit, push, and redeploy to Vercel.
 | SEO / server rendering | Next.js (auto SSR) |
 | Mobile app | React Native or Expo |
 
+### Backend One-Shot Prompt
+
+```
+Create a Next.js project with Supabase for auth and database.
+Set up login with email/password, a protected dashboard page,
+and a [describe your data] table. Use shadcn/ui and Tailwind.
+Deploy to Vercel.
+```
+
 ---
 
 ## Stack Reference
+
+### Frontend (This Pipeline)
 
 | Layer | Tool | Why |
 |-------|------|-----|
@@ -317,3 +387,14 @@ Test locally, commit, push, and redeploy to Vercel.
 | Components | shadcn/ui + Radix | Accessible, composable, beautiful |
 | Version Control | Git + GitHub | Rollback safety, collaboration, auto-deploy trigger |
 | Hosting | Vercel | Zero-config deploys, free tier, fast global CDN |
+
+### Full-Stack (When You Need Backend)
+
+| Layer | Tool | Why |
+|-------|------|-----|
+| Framework | Next.js | React + API routes + SSR in one |
+| Auth | Supabase Auth or Clerk | Free tier covers most apps |
+| Database | Supabase (Postgres) | SQL, realtime, row-level security, free 500MB |
+| Storage | Supabase Storage or Cloudflare R2 | File uploads without the headache |
+| Email | Resend | Clean API, 3K emails/month free |
+| Hosting | Vercel | Auto-deploys Next.js, serverless functions included |
