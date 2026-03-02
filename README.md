@@ -49,7 +49,7 @@ vercel --prod
 ├── tailwind.config.js
 ├── postcss.config.js
 ├── boracay-itinerary.jsx    # Original artifact source
-├── SHIP-IT.md               # Reusable deploy pipeline guide
+├── SHIPIT.md                # Reusable deploy pipeline guide
 └── src/
     ├── main.jsx
     ├── index.css
@@ -67,4 +67,4 @@ vercel --prod
 2. Scaffolded a Vite + React + Tailwind project with **Claude Code**
 3. Tested locally, deployed to **Vercel** in one command
 
-See [SHIP-IT.md](./SHIP-IT.md) for the full reusable pipeline.
+See [SHIPIT.md](./SHIPIT.md) for the full reusable pipeline.
