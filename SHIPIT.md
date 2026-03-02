@@ -61,21 +61,11 @@ The project exists, it's on GitHub, it's on Vercel. You just need to make change
 
 ---
 
-## Overview
+## The Full Pipeline
 
-A repeatable process for turning ideas into deployed, production-ready web apps.
+### Phase 1: Prototype in Claude Artifact
 
-| Phase | Tool | Output |
-|-------|------|--------|
-| 1. Prototype | Claude Artifact | Working React component |
-| 2. Scaffold | Claude Code + Vite | Full project with dependencies |
-| 3. Test | Local dev server | Verified, error-free build |
-| 4. Version | Git + GitHub | Source control + collaboration |
-| 5. Ship | Vercel | Live public URL |
-
----
-
-## Phase 1: Prototype in Claude Artifact
+**Why this matters:** You're not writing code yet — you're thinking out loud. Artifact gives you a visual sandbox to try layouts, shuffle data around, and feel the UX before committing to a real project. Changing direction here costs you nothing. Changing direction after scaffolding and deploying costs you time.
 
 Build your idea as a **single React component**. Focus on:
 
@@ -93,7 +83,9 @@ Build your idea as a **single React component**. Focus on:
 
 ---
 
-## Phase 2: Scaffold with Claude Code
+### Phase 2: Scaffold with Claude Code
+
+**Why this matters:** An Artifact is a component floating in space. It can't use real npm packages, can't be indexed by Google, can't have a URL you share with people. Scaffolding turns your prototype into a real project — with a build system, proper dependencies, and a structure that can grow.
 
 Drop the `.jsx` file in a project folder, then prompt:
 
@@ -131,7 +123,9 @@ project/
 
 ---
 
-## Phase 3: Test Locally
+### Phase 3: Test Locally
+
+**Why this matters:** Artifacts run in a sandboxed environment. Real browsers are different — fonts load differently, scroll behavior changes, mobile viewports break layouts. Testing locally catches the stuff that worked in the artifact but breaks in the real world. It also verifies your build pipeline works before you ship broken code to production.
 
 ```bash
 npm install           # Install dependencies
@@ -147,7 +141,21 @@ npm run build         # Verify production build succeeds
 
 ---
 
-## Phase 4: Git + GitHub
+### Phase 4: Git + GitHub
+
+**Why this matters:** The moment your code works, it becomes valuable. Without git, one bad edit and it's gone. Git gives you a save point you can always rewind to. GitHub makes it shareable — you can collaborate, open it on another machine, or connect it to auto-deploy so every push goes live.
+
+**The real question: can I skip this?**
+
+Technically yes. You can `vercel --prod` without git and it'll deploy. But here's the thing — it's almost never truly a one-off:
+
+- "Just a quick demo" → client loves it → now it needs updates
+- "Simple landing page" → now you want to tweak the copy next week
+- "Personal project" → you want to add features later
+
+Without git, your only option is to re-deploy the whole thing from scratch or pray you didn't break something. With git, you push changes in seconds and can always roll back.
+
+**Rule of thumb:** If you'd be annoyed re-building it from zero, git it.
 
 ```bash
 git init
@@ -172,7 +180,9 @@ Init git, commit everything, create a GitHub repo, and push.
 
 ---
 
-## Phase 5: Deploy to Vercel
+### Phase 5: Deploy to Vercel
+
+**Why this matters:** A project on localhost doesn't exist to anyone but you. Deploying gives it a URL — now it's real. You can send it to someone, open it on your phone, share it on social media. Vercel specifically makes this painless: zero config for Vite, free tier handles most projects, global CDN makes it fast everywhere.
 
 **First time (one-time setup):**
 ```bash
@@ -186,8 +196,75 @@ vercel --prod
 
 Vercel auto-detects Vite, installs deps, builds, and gives you a live URL.
 
-**Auto-deploy (optional):**
-Connect the GitHub repo in Vercel Dashboard → Settings → Git. Every `git push` triggers a new deploy.
+**Auto-deploy (optional but recommended):**
+Connect the GitHub repo in Vercel Dashboard → Settings → Git. Every `git push` triggers a new deploy. This is where git really pays off — edit code, push, it's live in 30 seconds.
+
+---
+
+## Pick Your Pipeline
+
+Not every project needs every step. Here are common configurations:
+
+### Full Pipeline — Living Project
+
+**For:** Apps you'll keep updating, share with others, or grow over time.
+
+```
+Artifact → Scaffold → Test → Git + GitHub → Vercel (auto-deploy)
+```
+
+This is the default. Most projects end up here because ideas keep evolving.
+
+**Examples:** This itinerary app, a portfolio site, a client project, a tool you use regularly.
+
+**Why every step:** You need the prototype flexibility (Artifact), the real build system (Scaffold), confidence it works (Test), version history and rollback safety (Git), and a live URL that auto-updates (Vercel + GitHub).
+
+### Quick Ship — Get It Live Fast
+
+**For:** You know exactly what you're building. No exploration needed.
+
+```
+Claude Code (scaffold + build) → Test → Git + GitHub → Vercel
+```
+
+Skip the Artifact phase. Go straight to Claude Code with a clear prompt. Still use git because you'll likely tweak it later.
+
+**Examples:** A landing page from a Figma design, rebuilding something you've seen, a known pattern.
+
+### Throwaway Demo — Truly One-Off
+
+**For:** A proof-of-concept you need to show someone once, then never touch again.
+
+```
+Scaffold → Test → Vercel (no git)
+```
+
+No artifact exploration, no git. Just build it, verify it works, deploy it. Be honest though — if there's even a 20% chance you'll revisit this, add git. It takes 30 seconds and saves you from rebuilding from memory later.
+
+**Examples:** A quick demo for a meeting, a one-time event page, a throwaway prototype.
+
+**Warning:** This is rarer than you think. "I'll never touch this again" is almost always wrong lol.
+
+### Iterate — Already Shipped
+
+**For:** The project is live. You're adding features or fixing things.
+
+```
+Edit → Test → Git push → Auto-deploys
+```
+
+The pipeline is already set up. Now it's just: make changes, verify locally, push, done. This is where the earlier setup investment pays off — every future change is effortless.
+
+**Examples:** Adding dark mode, updating content, fixing a mobile layout bug, adding a new page.
+
+### Quick Reference
+
+| Pipeline | Steps | When |
+|----------|-------|------|
+| **Full** | Artifact → Scaffold → Test → Git → Vercel | Most projects (default) |
+| **Quick Ship** | Scaffold → Test → Git → Vercel | You know what you want |
+| **Throwaway** | Scaffold → Test → Vercel | Truly one-off (rare) |
+| **Iterate** | Edit → Test → Push | Already live, making changes |
 
 ---
 
@@ -233,10 +310,10 @@ Test locally, commit, push, and redeploy to Vercel.
 
 | Layer | Tool | Why |
 |-------|------|-----|
-| Prototype | Claude Artifact | Instant visual iteration |
+| Prototype | Claude Artifact | Instant visual iteration, zero setup |
 | Framework | React 18 | Component model, huge ecosystem |
 | Build | Vite | Fast HMR, clean config |
-| Styling | Tailwind CSS | Utility-first, no CSS files |
+| Styling | Tailwind CSS | Utility-first, no CSS files to manage |
 | Components | shadcn/ui + Radix | Accessible, composable, beautiful |
-| Version Control | Git + GitHub | Standard, integrates with everything |
-| Hosting | Vercel | Zero-config deploys, free tier, fast CDN |
+| Version Control | Git + GitHub | Rollback safety, collaboration, auto-deploy trigger |
+| Hosting | Vercel | Zero-config deploys, free tier, fast global CDN |
